@@ -11,12 +11,12 @@ function ParseFile($FileName, $ReturnOutput=$false){
   } Catch {
     return $false, $_.Exception;
   }
-
 }
 
 # Function for use in shortcut, uses short name ('i') to save space.
-function i($FileName, $ReturnState){
+function i($FileName, $ReturnState=$false){
   $State, $Error = ParseFile($FileName);
+  Write-Host $Error;
   if($ReturnState){
     return $State, $Error
   }
