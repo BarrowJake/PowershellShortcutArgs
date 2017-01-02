@@ -5,11 +5,16 @@ $global:ParsedContents;
 function ParseFile($FileName, $ReturnOutput=$false){
   Try{
     $global:ParsedFileName = [string]$FileName;
-    $global:ParsedContents = [string](cat -raw $FileName);
-    $CodeExec = ( ($ParsedContents+" 2>&1") | Out-String );
-    Invoke-Expression($CodeExec);
+    if(Test-Path $FileName){
+      $global:ParsedContents = [string](cat -raw $FileName);
+      $CodeExec = ( ($ParsedContents+" 2>&1") | Out-String );
+      Invoke-Expression($CodeExec);
+      return $true, $CodeExec
+    } else {
+      if($ReturnOutput){return $false, "Not a valid path";}
+    }
   } Catch {
-    return $false, $_.Exception;
+    if($ReturnOutput){return $false, $_.Exception;}
   }
 }
 
