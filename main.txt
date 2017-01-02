@@ -1,1 +1,23 @@
-$global:c;function a($f){Try{$global:c=[string](cat -raw $f);iex $c}Catch{Write-Host ('Error: '+$_.Exception.Message) -f red}}
+$global:ParsedFileName;
+$global:ParsedContents;
+
+# Main Function
+function ParseFile($FileName, $ReturnOutput=$false){
+  Try{
+    $global:ParsedFileName = [string]$FileName;
+    $global:ParsedContents = [string](cat -raw $FileName);
+    $CodeExec = ( ($ParsedContents+" 2>&1") | Out-String );
+    Invoke-Expression($CodeExec);
+  } Catch {
+    return $false, $_.Exception;
+  }
+
+}
+
+# Function for use in shortcut, uses short name ('i') to save space.
+function i($FileName, $ReturnState){
+  $State, $Error = ParseFile($FileName);
+  if($ReturnState){
+    return $State, $Error
+  }
+}
