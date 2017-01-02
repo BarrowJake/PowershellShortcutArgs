@@ -1,1 +1,1 @@
-$global:c; function a($f){Try{$global:c=[string](cat -raw $f);iex $c}Catch{Write-Host ('Error: '+$_.Exception.Message) -f red}} a
+$global:c; function a($f){Try{$global:c=[string](cat -raw $f);iex $c}Catch{Write-Host ('Error: '+$_.Exception.Message) -f red}}
