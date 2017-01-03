@@ -3,12 +3,10 @@ $global:ParsedContents;
 
 function PatchBrokenPath($PreviousFileName){
   Write-Host "[PathFixer]"
-  Try{
-    Get-History
-  }
-  Catch{
-    "Problem..."
-  }
+
+    $x = (Get-History | Out-String)
+    Write-Host 'GOT: $x'
+
 }
 
 # Main Function
