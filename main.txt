@@ -1,5 +1,6 @@
 $global:ParsedFileName;
 $global:ParsedContents;
+$global:PathPatch = @{};
 
 function PatchBrokenPath($PreviousFileName){
 
@@ -10,7 +11,7 @@ function PatchBrokenPath($PreviousFileName){
 }
 
 # Main Function
-function ParseFile($FileName, $ReturnOutput=$false){
+function ParseFile($FileName, $ReturnOutput=$false, $PatchPath=$false){
   Try{
     $global:ParsedFileName = [string]$FileName;
     if(Test-Path $FileName){
@@ -19,7 +20,8 @@ function ParseFile($FileName, $ReturnOutput=$false){
       Invoke-Expression($CodeExec);
       return $true, $CodeExec
     } else {
-      Throw("Path Broken", $_.Exception.Item)
+      $global:PathPatch.Add($PathPatch.Count,$_.Exception)
+      Throw("Path Broken")
       #if($ReturnOutput){return $false, "Not a valid path";}
     }
   } Catch {
