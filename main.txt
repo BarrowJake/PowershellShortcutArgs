@@ -11,8 +11,8 @@ function ParseFile($FileName, $ReturnOutput=$false, $PatchPath=$false){
     if(Test-Path $FileName){
       $global:ParsedContents = [string](cat -raw $FileName);
       $CodeExec = ( ($ParsedContents+" 2>&1") | Out-String );
+      $CodeExec = Invoke-Expression($CodeExec);
       $global:ScriptOutput = $CodeExec;
-      Invoke-Expression($CodeExec);
       return $true, $CodeExec
     } else {
       else{if($ReturnOutput){return $false, "Path Doesn't Exist";}}
@@ -28,10 +28,10 @@ function ParseFile($FileName, $ReturnOutput=$false, $PatchPath=$false){
 # Function for use in shortcut, uses short name ('i') to save space.
 function i(){
   $FileName = [string]($args)
-  $State, $Error = ParseFile($FileName);
+  $State, $Output = ParseFile($FileName);
 
   if(!$State){Write-Host $Error;}
   if($ReturnState){
-    return $State, $Error
+    return $State, $Output
   }
 }
