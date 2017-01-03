@@ -22,7 +22,7 @@ function ParseFile($FileName, $ReturnOutput=$false){
 function PatchBrokenPath($PreviousFileName){
   $GrabRecentCommands = Get-History | Select-Object -Property CommandLine
   Write-Host "Path Was Broken..."
-  $GrabRecentCommands
+  Write-Host ($GrabRecentCommands[0])
 }
 
 # Function for use in shortcut, uses short name ('i') to save space.
