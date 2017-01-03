@@ -4,7 +4,7 @@ $global:ParsedContents;
 function PatchBrokenPath($PreviousFileName){
 
   Write-Host "[PathFixer]"
-  Get-EventLog -EntryType Error
+  Get-History
 
 }
 
