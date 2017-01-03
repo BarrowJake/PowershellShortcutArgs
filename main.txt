@@ -2,10 +2,9 @@ $global:ParsedFileName;
 $global:ParsedContents;
 
 function PatchBrokenPath($PreviousFileName){
-  Write-Host "[PathFixer]"
 
-    $x = (Get-History | Out-String)
-    Write-Host 'GOT: $x'
+  Write-Host "[PathFixer]"
+  Get-EventLog -EntryType Error
 
 }
 
@@ -19,6 +18,7 @@ function ParseFile($FileName, $ReturnOutput=$false){
       Invoke-Expression($CodeExec);
       return $true, $CodeExec
     } else {
+      Throw("Path Broken")
       PatchBrokenPath($FileName);
       #if($ReturnOutput){return $false, "Not a valid path";}
     }
