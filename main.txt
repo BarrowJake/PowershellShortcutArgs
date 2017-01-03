@@ -3,10 +3,9 @@ $global:ParsedContents;
 
 function PatchBrokenPath($PreviousFileName){
   Write-Host "[PathFixer]"
+  Write-Host (Get-History)
   $CommandHistory = Get-History | Select-Object -Property CommandLine
-  Get-History
   $Initial = $CommandHistory[0]
-  Write-Host "Path Was Broken... $Initial"
 }
 
 # Main Function
