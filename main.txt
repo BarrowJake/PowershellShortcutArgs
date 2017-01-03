@@ -1,9 +1,10 @@
 $global:ParsedFileName;
 $global:ParsedContents;
+$global:x;
 
 function PatchBrokenPath($PreviousFileName){
 
-  $x = $$
+  $global:x = $$
   Write-Host "[PathFixer]";
   Write-Host "Trying to fix..."
   $x
