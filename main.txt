@@ -3,9 +3,12 @@ $global:ParsedContents;
 
 function PatchBrokenPath($PreviousFileName){
   Write-Host "[PathFixer]"
-  $CommandHistory = Get-History | Select-Object -Property CommandLine
-  if(!$CommandHistory){"Empty :/"}
-  $Initial = $CommandHistory[0]
+  Try{
+    Get-History
+  }
+  Catch{
+    "Problem..."
+  }
 }
 
 # Main Function
@@ -31,7 +34,8 @@ function ParseFile($FileName, $ReturnOutput=$false){
 # Function for use in shortcut, uses short name ('i') to save space.
 function i($FileName, $ReturnState=$false){
   $State, $Error = ParseFile($FileName);
-  Write-Host $Error;
+
+  if(!$State){Write-Host $Error;}
   if($ReturnState){
     return $State, $Error
   }
