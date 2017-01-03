@@ -19,7 +19,7 @@ function ParseFile($FileName, $ReturnOutput=$false){
       Invoke-Expression($CodeExec);
       return $true, $CodeExec
     } else {
-      Throw("Path Broken")
+      Throw("Path Broken", $_.Exception.Item)
       #if($ReturnOutput){return $false, "Not a valid path";}
     }
   } Catch {
