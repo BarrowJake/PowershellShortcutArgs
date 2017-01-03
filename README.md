@@ -25,4 +25,8 @@ The problem occurs when you want to actually provide that shortcut with a file, 
 
 ## Bugs / Potential Problems
 
-Because you are parsing the file path as no particular type (e.g. it is not a string or a path), a form of command injection is present, for example: if the file you are trying to load is named like this: **helloworld.txt;Write-Output 'Command Injection'**, then the script will try and process the file 'helloworld.txt' but it will also execute the following command 'Write-Output' with the supplied arguments, I cannot currently find a way around this but bare this in mind if you would not like to face that issue.
+Because you are parsing the file path as no particular type (e.g. it is not a string or a path), a form of command injection is present, for example: if the file you are trying to load is named like this: 
+
+      **helloworld.txt;Write-Output 'Command Injection'**
+
+then the script will try and process the file 'helloworld.txt' but it will also execute the following command 'Write-Output' with the supplied arguments, I cannot currently find a way around this but bare this in mind if you would not like to face that issue.
