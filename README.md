@@ -5,7 +5,7 @@
 **ShortcutArgs**
 
 
-This project was made to add the ability to parse files to powershell script that is not running off of a '.ps1' file. The file itself can be parsed to a windows shorcut that refrences powershell.
+This project was made to add the ability to parse files to powershell script that is not running off of a '.ps1' file. The file itself can be parsed to a windows shorcut that references powershell.
 
 
 The reason for this could be that script execution is not enabled on the target device and therfore you cannot use '.ps1' files, instead we simply make a shorcut that points to powershell.exe and parse the code straight from the text box.
