@@ -4,7 +4,8 @@ $global:ParsedContents;
 function PatchBrokenPath($PreviousFileName){
 
   Write-Host "[PathFixer]";
-  $$
+  Write-Host "Trying to fix..."
+  $Error
 
 }
 
