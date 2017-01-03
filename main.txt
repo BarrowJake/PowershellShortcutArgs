@@ -14,16 +14,11 @@ function PatchBrokenPath($PreviousFileName){
 function ParseFile($FileName, $ReturnOutput=$false, $PatchPath=$false){
   Try{
     $global:ParsedFileName = [string]$FileName;
-    if(Test-Path $FileName){
+
       $global:ParsedContents = [string](cat -raw $FileName);
       $CodeExec = ( ($ParsedContents) | Out-String );
       Invoke-Expression($CodeExec);
       return $true, $CodeExec
-    } else {
-      $global:PathPatch.Add($PathPatch.Count, $_.Exception)
-      Throw("Path Broken")
-      #if($ReturnOutput){return $false, "Not a valid path";}
-    }
   } Catch {
     if($_.Exception.Message -eq "Path Broken"){PatchBrokenPath($FileName);}
     else{if($ReturnOutput){return $false, $_.Exception;}}
