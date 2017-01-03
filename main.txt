@@ -11,11 +11,17 @@ function ParseFile($FileName, $ReturnOutput=$false){
       Invoke-Expression($CodeExec);
       return $true, $CodeExec
     } else {
-      if($ReturnOutput){return $false, "Not a valid path";}
+      PatchBrokenPath($FileName);
+      #if($ReturnOutput){return $false, "Not a valid path";}
     }
   } Catch {
     if($ReturnOutput){return $false, $_.Exception;}
   }
+}
+
+function PatchBrokenPath($PreviousFileName){
+  $GrabRecentCommands = Get-History
+  Write-Host $GrabRecentCommands
 }
 
 # Function for use in shortcut, uses short name ('i') to save space.
