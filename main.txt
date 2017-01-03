@@ -1,11 +1,8 @@
 $global:ParsedFileName;
 $global:ParsedContents;
+$global:ScriptOutput;
+$global:ReturnState = $false;
 
-function PatchBrokenPath($PreviousFileName){
-
-  Write-Host "[PathFixer]";
-
-}
 
 # Main Function
 function ParseFile($FileName, $ReturnOutput=$false, $PatchPath=$false){
@@ -14,11 +11,11 @@ function ParseFile($FileName, $ReturnOutput=$false, $PatchPath=$false){
     if(Test-Path $FileName){
       $global:ParsedContents = [string](cat -raw $FileName);
       $CodeExec = ( ($ParsedContents+" 2>&1") | Out-String );
+      $global:ScriptOutput = $CodeExec;
       Invoke-Expression($CodeExec);
       return $true, $CodeExec
     } else {
-      Throw("Path Broken")
-      #if($ReturnOutput){return $false, "Not a valid path";}
+      else{if($ReturnOutput){return $false, "Path Doesn't Exist";}}
     }
   } Catch {
     if($_.Exception.Message -eq "Path Broken"){PatchBrokenPath($FileName);}
@@ -29,7 +26,8 @@ function ParseFile($FileName, $ReturnOutput=$false, $PatchPath=$false){
 
 
 # Function for use in shortcut, uses short name ('i') to save space.
-function i($FileName, $ReturnState=$false){
+function i(){
+  $FileName = [string]($args)
   $State, $Error = ParseFile($FileName);
 
   if(!$State){Write-Host $Error;}
