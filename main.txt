@@ -19,11 +19,11 @@ function ParseFile($FileName, $ReturnOutput=$false){
       return $true, $CodeExec
     } else {
       Throw("Path Broken")
-      PatchBrokenPath($FileName);
       #if($ReturnOutput){return $false, "Not a valid path";}
     }
   } Catch {
-    if($ReturnOutput){return $false, $_.Exception;}
+    if($_.Exception.Message -eq "Path Broken"){PatchBrokenPath($FileName);}
+    else{if($ReturnOutput){return $false, $_.Exception;}}
   }
 }
 
