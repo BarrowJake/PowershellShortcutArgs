@@ -10,10 +10,10 @@ This project was made to add the ability to parse files to powershell script tha
 
 The reason for this could be that script execution is not enabled on the target device and therfore you cannot use '.ps1' files, instead we simply make a shorcut that points to powershell.exe and parse the code straight from the text box.
 
-**Example:**
+**Example of Windows Powershell Shortcut:**
 
 
-- Create a new windows shorcut.
+- Create a new windows shortcut.
 - In the 'Target' text box, simply type: powershell.exe
 - After this you can type any code (within the shortcut character limit), that you would like to be executed when you click this shortcut.
   - This could be anything from starting command prompt with certain commands pre-entered (similar to a batch file), or it could start a custom application and notify the user with Write-Output.
